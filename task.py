@@ -25,13 +25,13 @@ df=dict(pd.read_csv("yearly_stats.csv"))
 l=[]
 for i in range(len(df["Average"])):
     l.append([df["Player"][i],df["Runs"][i],df["Year"][i],df["100s"][i],df["50s"][i]])
-cricketer=input("Enter player name with country in braces(Ex. Player (Country)):\nINDIA for india\nAUS for australia\nENG for england\nSA for south africa\nWI for west indies\n and so on\n")
+cricketer=input("Enter player name:")
 year=int(input("Enter year upto which you want to get runs:"))
 r,c,f=0,0,0
 fi,h=0,0
 list2=[]
 for i in l:
-    if i[0]==cricketer :
+    if cricketer[2:] in i[0] and cricketer[0]==i[0][0]:
         c+=1
         list2.append(i[2])
         if i[2]<=year:
@@ -45,5 +45,8 @@ if list2[-1]==now.year:
     print("He is still playing!!")
 else:
     print("Last year he played:"+str(list2[-1]))
-print("Total no.of runs till "+str(year)+":"+str(r))
+if year>list2[-1]:
+    print("Total no.of runs till "+str(list2[-1])+":"+str(r))
+else:
+    print("Total no.of runs till "+str(year)+":"+str(r))
 print("With "+str(fi)+" fifties and "+str(h)+" hundreds")
